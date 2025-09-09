@@ -27,12 +27,17 @@ SECRET_KEY = 'django-insecure-o0z&k5wt*eis@7)e0g_s)n1f@znu9(zgkayt8p-+0ts9evjw(g
 DEBUG = 'RENDER' not in os.environ #True
 
 ALLOWED_HOSTS = []
-VERCEL_URL = os.environ.get('VERCEL_URL')
-if VERCEL_URL:
-    ALLOWED_HOSTS.append(VERCEL_URL.split('//')[1]) # Extract just the hostname
 
 # For local development
 ALLOWED_HOSTS.append('127.0.0.1')
+
+VERCEL_URL = os.environ.get('VERCEL_URL')
+if VERCEL_URL:
+    hostname = VERCEL_URL.split('://')[-1] 
+    ALLOWED_HOSTS.append(hostname)# Extract just the hostname
+
+    
+
 
 # Application definition
 
