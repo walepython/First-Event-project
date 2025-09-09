@@ -1,0 +1,104 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{% static 'style4.css' %}"/>
+  
+
+<div class="body"></div>
+<section class="section">
+  <p class="tagline">THE ULTIMATE PLATFORM FOR UNFORGETTABLE EVENTS</p>
+  <h1>Experience Rocky-Naija Today!</h1>
+  <p>
+    Whether you’re looking to relax, celebrate, or discover something new, Rocky-Naija is your go-to hub for all things entertainment.  
+    From electrifying concerts and cultural festivals to exclusive parties and lifestyle events, we bring you closer to the action.  
+  </p>
+  <p>
+    Our mission is simple: to connect people, passion, and unforgettable moments.  
+    With just a few clicks, you can explore upcoming events, secure your spot, and create lasting memories with friends and loved ones.  
+  </p>
+  <p>
+    Don’t just hear about it — live it. Rocky-Naija is here to make every occasion count.  
+    <strong>Discover. Connect. Celebrate.</strong>
+  </p>
+  <a href="#event"> <button class="btn">Explore more</button></a>
+</section>
+ 
+
+  <h1 class="upcoming">Upcoming Events</h1>
+  <section id="sect">
+    
+  {% for event in events %}
+  <a href="{% url 'event_detail' event.id %}"> 
+    <div id="event">
+      <div>
+           {% if event.image %}
+           <img src="{{ event.image.url }}" alt="{{ event.title }}" width="300">
+            {% else %}
+           <img src="{% static 'images/abuja-images.jpg' %}" alt="Default image">
+           {% endif %}
+      </div>
+      <div style="width: 400px;">
+      <h2><a class="h2" href="{% url 'event_detail' event.id %}">{{ event.title }}</a></h2>
+      <h3 class="h3">{{ event.Date|date:"F d, Y " }}</h3>
+        <h3 class="h4"> {{ event.Location }}</h3>
+      <p class="discript">{{ event.Description|truncatewords:30 }}</p>
+      <a href="{% url 'event_detail' event.id %}"><button class="btn2" type="submit">View Detail</button></a>
+      </div>
+
+      <div class="event-date">
+        <h1><span class="day"><p>{{ event.Date|date:" d " }}</p></span> <span class="month"><p>{{ event.Date|date:"M " }}</p></span></h1>
+        <p class="time">{% if event.start_time %}  {{ event.start_time|time:"g:i A" }}{% endif %}
+          {% if event.end_time %} - {{ event.end_time|time:"g:i A" }}{% endif %}</p>
+      </div>
+    </div></a>
+
+    
+   
+  {% empty %}
+    <p>No upcoming events.</p>
+  </section>
+  {% endfor %}
+  <!-- <a style="border: 2px solid purple; padding: 8px; border-radius: 8px;" href="{% url 'event_register_form' %}">UPLOAD EVENT</a> -->
+{% endblock %}
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Events</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>DATE</th>
+            <th>LOCATION</th>
+        </tr>
+        <tbody>
+            {% for event in events%}
+            <tr>
+                <td>{{event.id}}</td>
+                <td>{{event.title}}</td>
+                <td>{{event.Description}}</td>
+                <td>{{event.Date}}</td>
+                <td>{{event.Location}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'register_event'%}">register</a>
+</body>
+</html> -->

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style4.css' %}"/>
+
+<div class="container">
+    <div class="hero-section">
+        <p class="hero1">All the fun start here.</p>
+        <h1 class="hero2">Book your Tickets for Event!</h1>
+        <p class="hero3"> The ultimate platform for event promotion. With our cutting-edge event management tools and powerful marketing features, you can streamline your event planning process, increase attendance, and boost engagement. Join our community of  event organizers today and discorver the power of event with Rocky-Naija </p><br>
+        <div class="radio">
+        <input type="radio"name="event"/>
+        <label for="event">Safe, Secure, Reliable ticketing</label>
+        </div><br>
+        <div class="radio">
+        <input type="radio"name="event"/>
+        <label for="event">Your ticket to live entertainment</label>
+        </div><br><br>
+
+        <button class="btn" type="submit">View More</button>
+
+    </div>
+</div>
+<div class="body"></div>
+<h1 style="margin-top:50px; text-align: center; margin-bottom: 20px;color: blueviolet;">WELCOME TO EVENT PAGE</h1>
+
+
+<section class="home-section">
+    <h1> WHO <span>WE ARE</span> </h1>
+    <p>Rocky-Naija is a comprehencive platform that promote event,confrence,and other industry-related gatherings.our team of exprienced professional is dedicated to providing unparalleled event management solutions that help you streamline your event planning process and maximize your ROI. We believe that events are powerful tools for driving growth, innovation, and success, and we are committed to helping you make the most of every opportunity.</p>
+    <a href="#"><button class="home-button">contact</button></a>
+</section>
+<section class="home-section2">
+    <h2>EASY EVENT<span>DISCOVERY AND LOCATION</span></h2>
+   <section>
+    <div class="div1">
+        <i class="fas fa-list-check"></i>
+        <h4>Choose What To Do</h4>
+        <p>Easily browse and select from a wide range of event categories and subcategories base on your intrests and prefrence.</p>
+    </div>
+    <div class="div2">
+        <i class="fas fa-barcode"></i>
+        <h4>Find What You Want</h4>
+        <p>use our powerful search and filtering tools to quickly find events that match your criteria,including location, date, price,etc </p>
+    </div>
+
+    <div class="div3">
+        <i class="fas fa-map-marked-alt"></i>
+        <h4>Specify Your Location</h4>
+        <p>Specify your location and radius to discover events happening near you or in your preferred destination</p>
+    </div>
+   </section>
+    <img src="/static/images/ojude oba image.jpg" alt="">
+    
+</section>
+
+{% endblock %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="margin-top:50px; margin-left: 40px;">WELCOME TO EVENT PROGRAMING PAGE</h1>
+    <a href="{% url 'event_list' %}">EVENT DETAILS</a>
+</body>
+</html>
+ -->

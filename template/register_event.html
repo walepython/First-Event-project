@@ -1,0 +1,116 @@
+
+<!-- events/templates/events/my_registrations.html -->
+ 
+{% extends 'base.html' %}
+{% load static %}  
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style4.css' %}"/>
+  
+
+<div class="body"></div>
+
+  <h1 style="text-align: center; background: linear-gradient(to right, blue,cyan,purple); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-top: 40px; margin-bottom: 40px;">My Registered Events</h1>
+  <section id="section">
+  {% for reg in registrations %}
+  
+    <div id="register">
+     
+      {% if reg.event.image %}
+      <img id="img2"  src="{{ reg.event.image.url }}" alt="{{ reg.event.title }}">
+
+      {% else %}
+      <img id="img2"  src="{% static 'images/abuja-images.jpg' %}" alt="Default image" >
+      {% endif %}
+
+      <div class="register">
+      <h2><a href="{% url 'event_detail' reg.event.id %}">{{ reg.event.title }}</a></h2>
+      <p><strong>Event Date:</strong> {{ reg.event.Date|date:"F d, Y " }}</p>
+      <p><strong>Registered On:</strong> {{ reg.timestamp|date:"F d, Y " }}</p>
+      <p class="ticket"><span>Ticket:</span> {{ reg.ticket_type|title }} - ${{ reg.price }}</p>
+    </div>
+    </div>
+  
+  {% empty %}
+  <div style="
+  margin-top: 70px;
+  margin-left: 350px;
+  display: inline-block;
+  padding: 3px; 
+  border-radius: 12px;
+  background: linear-gradient(to right, blue,purple);
+">
+  <p style="
+    color: #fff; 
+    font-weight: bold; 
+    padding: 12px 24px; 
+    font-size: larger; 
+    background: #111;   /* Inner background */
+    border-radius: 10px; /* 👈 This now works */
+    margin: 0;
+  ">
+    You are not registered for any upcoming events.
+  </p>
+</div>
+
+
+  {% endfor %}
+</section>
+{% endblock %}
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container ">
+  <div class="row justify-content-center ">
+    <div class="col-md-5 bg-success text-white p-5 rounded mt-5">
+      <h2> Welcome, create page</h2>
+
+          <form action="{% url 'register_event'%}" method="post">
+               {% csrf_token %}
+          <div class="mb-3">
+            <label for="ProductName" class="form-label">TITLE</label>
+            <input type="text" name="name" class="form-control" id="productName">
+
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Discription</label>
+            <textarea type="text" width="150px" height="100px" name="discript" class="form-control" id="exampleInputPassword1">
+            </textarea>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">DATE</label>
+            <input type="date" name="date" class="form-control" id="exampleInputPassword2">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">LOCATION</label>
+            <input type="text" name="locate" class="form-control" id="exampleInputPassword2">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form><br><br>
+        <a href="{% url 'event'%}" class="btn btn-primary">EVENT DETAILS</a>
+    </div>
+  </div>
+</div>
+</body>
+</html> -->

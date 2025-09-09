@@ -1,0 +1,173 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event System</title>
+    <link rel="stylesheet" href="{% static 'style4.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { 
+            font-family: sans-serif;  
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header styles */
+        
+        .site-header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .site-header nav {
+            display: flex; 
+            gap: 30px;
+            align-items: center;
+        }
+
+        .site-header .auth-links {
+            display: flex; 
+            gap: 30px; 
+            justify-content: center; 
+            align-items: center;
+        }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'style4.css'%}">
+     
+   
+</head>
+<body>
+    <div class="site-header">
+        <a href="{% url 'home' %}" style="border: 2px solid purple; padding: 8px; border-radius: 15px; background: black; font-weight: 600;">
+            ROCKY<br><span style="font-size: 13px; color:cyan">NAIJA</span>
+        </a>
+
+        <nav>
+            <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <span style="color:white">||</span>
+
+        <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+        <span style="color:white">||</span>
+
+        <a href="{% url 'event_list' %}" class="{% if request.resolver_match.url_name == 'event_list' %}active{% endif %}">Events</a>
+            <span style="color:white">||</span>
+
+            <a href="{% url 'blogs' %}" class="{% if request.resolver_match.url_name == 'blogs' %}active{% endif %}">Blogs</a>
+           <span style="color:white">||</span>
+
+           <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+            <span style="color:white">||</span>
+
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'my_registrations' %}" class="{% if request.resolver_match.url_name == 'my_registrations' %}active{% endif %}">My Registrations</a>
+               <span style="color:white">||</span>
+
+                <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </nav>
+
+        {% if not user.is_authenticated %}
+        <div class="auth-links">
+
+            <a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Log In</a>
+            
+            <a href="{% url 'register' %}" style="border: 2px solid purple; padding: 8px; border-radius: 8px;">Sign Up</a>
+        </div>
+        {% endif %}
+       <div id="car">
+
+        <i class="fa fa-bars" id="menu" style="font-size:36px"></i>
+       </div>
+        
+    </div>
+
+    <div class="side-bar">
+
+        <nav>
+            <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <span style="color:white">||</span>
+
+        <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+        <span style="color:white">||</span>
+
+        <a href="{% url 'event_list' %}" class="{% if request.resolver_match.url_name == 'event_list' %}active{% endif %}">Events</a>
+            <span style="color:white">||</span>
+
+            <a href="{% url 'blogs' %}" class="{% if request.resolver_match.url_name == 'blogs' %}active{% endif %}">Blogs</a>
+           <span style="color:white">||</span>
+
+           <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+            <span style="color:white">||</span>
+
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'my_registrations' %}" class="{% if request.resolver_match.url_name == 'my_registrations' %}active{% endif %}">My Registrations</a>
+               <span style="color:white">||</span>
+
+                <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </nav>
+
+        {% if not user.is_authenticated %}
+        <div class="auth-links">
+
+            <a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Log In</a>
+            
+            <a href="{% url 'register' %}" style="border: 2px solid purple; padding: 8px; border-radius: 8px;">Sign Up</a>
+        </div>
+        {% endif %}
+        <i class="fa fa-arrow-left" id="arrow-left" aria-hidden="true"></i>
+
+    </div>
+
+    
+
+    {% block content %}{% endblock %}
+    <footer class="footer-community">
+        <div class="footer-container">
+            <div class="footer-main">
+                <h3 class="footer-logo">ROCKY-NAIJA</h3>
+                <p>Connecting communities, celebrating culture. Your home for authentic Nigerian experiences.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'event_list' %}">Events</a></li>
+                    <li><a href="{% url 'blogs' %}">Blogs</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Stay Updated!</h4>
+                <p>Get the latest gist, events, and offers straight to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Rocky Naija. Proudly Nigerian. Created By Waminisce the Dev</p>
+        </div>
+    </footer>
+
+    <script src="{% static '/js/base.js' %}"></script>
+</body>
+</html>

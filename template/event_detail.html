@@ -1,0 +1,97 @@
+<!-- events/templates/events/event_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'style4.css' %}">
+<style>
+  .style {
+    position: relative; min-height: 100vh; 
+    /* background-image: linear-gradient(to right, rgba(5, 5, 150, 0.65), rgba(8, 8, 8, 0.75)), url('{% static "images/event background image.jpg" %}'); */
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;   /* fixed background */
+    display: flex; justify-content: center; align-items: center; 
+    padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .style1 {
+    display: flex; gap: 30px; justify-content: center; align-items: center;
+    max-width: 1000px; width: 100%; padding: 30px 50px;
+    background: rgba(255,255,255,0.08); border-radius: 16px; 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3); backdrop-filter: blur(10px); 
+    text-align: center; color: #fff;
+  }
+  .img2 {
+    width: 500px; object-fit: cover; border-radius: 12px;
+  }
+  .btn {
+    padding: 12px 20px; border: none; border-radius: 8px; 
+    color: white; font-weight: bold; cursor: pointer; 
+    transition: transform 0.2s ease-in-out;
+  }
+  .btn:hover { transform: scale(1.05); }
+  .btn-primary { background: linear-gradient(to right, blue, cyan, purple); }
+  .btn-danger { background: #e74c3c; }
+  .btn-success { background: linear-gradient(to right, green, lime); }
+  @media (max-width:768px) {
+    .style1 { flex-direction: column; padding: 40px 30px; gap: 15px; }
+    .img2 { width: 90%; }
+  }
+</style>
+<div class="body"></div>
+<div class="style">
+  <div class="style1">
+      
+    {% if event.image %}
+      <img class="img2" src="{{ event.image.url }}" alt="{{ event.title }}">
+    {% else %}
+      <img class="img2" src="{% static 'images/abuja-images.jpg' %}" alt="Default image">
+    {% endif %}
+      
+    <div>
+      <h1 style="font-size: 42px; font-weight: 900; background: linear-gradient(to right, cyan, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">
+          {{ event.title }}
+      </h1>
+
+      <p style="font-size:18px; margin:8px 0; color:#ddd;">
+        <strong style="color:#f39c12;">When:</strong> {{ event.Date|date:"F d, Y" }}
+        {% if event.start_time %} at {{ event.start_time|time:"g:i A" }}{% endif %}
+        {% if event.end_time %} - {{ event.end_time|time:"g:i A" }}{% endif %}
+      </p>
+
+      <p style="font-size:18px; margin:8px 0; color:#ddd;">
+        <strong style="color:#f39c12;">Where:</strong> {{ event.Location }}
+      </p>
+
+      <p style="font-size:18px; margin:15px 0; color:#eee;">{{ event.Description }}</p>
+
+      <!-- Ticket Form -->
+      {% if user.is_authenticated %}
+        {% if is_registered %}
+          <p style="color:#0f0;">You are registered for this event.</p>
+          <form action="{% url 'cancel_registration' event.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Cancel Registration</button>
+          </form>
+        {% else %}
+          <form action="{% url 'register_for_event' event.id %}" method="post" style="margin-top:20px;">
+            {% csrf_token %}
+            <label for="ticket_type" style="font-weight:600; margin-right:10px;">Choose Ticket:</label>
+            <select name="ticket_type" id="ticket_type" required style="padding:10px; border-radius:6px; border:1px solid #ccc; margin-right:10px;">
+              <option value="regular">Regular - ${{ event.gate_fees }}</option>
+              <option value="vip">VIP - ${{ event.gate_fees2 }}</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        {% endif %}
+      {% else %}
+        <p><a href="{% url 'login' %}?next={{ request.path }}" style="color:#f39c12; font-weight:600; text-decoration:none;">Login to register for this event.</a></p>
+      {% endif %}
+
+      <a href="{% url 'event_list' %}" style="display:inline-block; margin-top:20px; text-decoration:none; color:#f39c12; font-weight:600;">⬅ BACK</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

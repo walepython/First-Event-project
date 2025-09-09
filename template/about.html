@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style4.css' %}">
+
+    <div class="body"></div>
+    <section class="about-section">
+        <div class="about-div">
+        <img src="/static/images/image-test3.jpg" alt="">
+        <div class="about-container">
+        <h1> WHO <span>WE ARE</span> </h1>
+        <p>Rocky-Naija is a comprehencive platform that promote event,confrence,and other industry-related gatherings.our team of exprienced professional is dedicated to providing unparalleled event management solutions that help you streamline your event planning process and maximize your ROI. We believe that events are powerful tools for driving growth, innovation, and success, and we are committed to helping you make the most of every opportunity.</p>
+        <a href="{% url 'contact' %}"><button class="about-button">contact</button></a>
+    </div>
+</div>
+    <div class="about-count">
+        <div>
+            <h3>1,100</h3>
+            <p>Event held</p>
+        </div>
+        <div>
+            <h3>56</h3>
+            <p>Upcoming Event</p>
+        </div>
+    </div>
+
+    <div class="about-moment">
+        <h4> SEE <span>THE BEST MOMENTS </span>FROM OUR EVENT</h4>
+        <img src="/static/images/image-test4.jpg" alt="">
+    </div>
+    </section>
+{% endblock%}

@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style4.css' %}">
+
+<div class="body"></div>
+<section class="blog-section">
+    <h2 class="blog-title">Event Stories & Updates</h2>
+    <p class="blog-subtitle">News, blogs, and behind-the-scenes from our event ✨</p>
+  
+    <div class="blog-grid">
+      <!-- Blog Card 1 -->
+      <article class="blog-card">
+        <img src="{% static 'images/naming-image.jpg' %}" alt="Event highlight" class="blog-img">
+        <div class="blog-content">
+          <h3 class="blog-post-title">Opening Ceremony Highlights</h3>
+          <p class="blog-date">Sept 1, 2025</p>
+          <p class="blog-excerpt">The energy was electric as we kicked off with live performances, cultural showcases, and a stunning fireworks display...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+  
+      <!-- Blog Card 2 -->
+      <article class="blog-card">
+        <img src="{% static 'images/naming-image2.jpg' %}" alt="Backstage moments" class="blog-img">
+        <div class="blog-content">
+          <h3 class="blog-post-title">Behind the Scenes: Setting the Stage</h3>
+          <p class="blog-date">Aug 28, 2025</p>
+          <p class="blog-excerpt">Go backstage with our crew as they set up lights, sound, and stage design for this year’s biggest performances...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+  
+      <!-- Blog Card 3 -->
+      <article class="blog-card">
+        <img src="{% static 'images/naming-image3.jpg' %}" alt="Community vibe" class="blog-img">
+        <div class="blog-content">
+          <h3 class="blog-post-title">Community Stories</h3>
+          <p class="blog-date">Aug 20, 2025</p>
+          <p class="blog-excerpt">From local vendors to first-time visitors, here are the voices and experiences that make the event unforgettable...</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+  
+{% endblock %}
