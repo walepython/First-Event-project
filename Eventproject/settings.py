@@ -24,10 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o0z&k5wt*eis@7)e0g_s)n1f@znu9(zgkayt8p-+0ts9evjw(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ #True
 
 ALLOWED_HOSTS = []
+VERCEL_URL = os.environ.get('VERCEL_URL')
+if VERCEL_URL:
+    ALLOWED_HOSTS.append(VERCEL_URL.split('//')[1]) # Extract just the hostname
 
+# For local development
+ALLOWED_HOSTS.append('127.0.0.1')
 
 # Application definition
 
@@ -40,10 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'EventApp',
     'register',
+    'cloudinary',          # Add this
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,21 +82,36 @@ WSGI_APPLICATION = 'Eventproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+ 
+if 'POSTGRES_URL' in os.environ:
+    # This block will run ONLY when deployed on Vercel
+    # It reads the secret database URL from the environment variables
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('POSTGRES_URL'),
+            conn_max_age=600 # Optional: keeps connections alive for 10 minutes
+        )
+    }
 
-DATABASES = {
-    'default': {
+
+else: 
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
 
-
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'EventRegistration',
-        'USER': 'root',
-        'PASSWORD':'waminisce',
-        'PORT': '3306',
-        'HOST': '127.0.0.1'
+         # This block will run on your local machine
+    # It uses your local MySQL database for development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'EventRegistration',
+            'USER': 'root',
+            'PASSWORD':'waminisce',
+            'PORT': '3306',
+            'HOST': '127.0.0.1'
+        }
+        
     }
-}
+
 
 
 # Password validation
@@ -132,15 +155,25 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('dcf7dmuwf'),
+    'API_KEY': os.environ.get('338367537587162'),
+    'API_SECRET': os.environ.get('wYJAH8OF5eCQSn4sWGFNuvjMh-c'),
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 
 
-LOGIN_REDIRECT_URL = 'event_detail'
+LOGIN_REDIRECT_URL = 'home'
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
