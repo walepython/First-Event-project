@@ -11,7 +11,6 @@ from .form import RegistrationForm # Import our new form
 
 
 def register(request):
-    # If the request method is POST, it means the form has been submitted
     if request.method == 'POST':
         # Create a form instance with the submitted data
         form = RegistrationForm(request.POST)

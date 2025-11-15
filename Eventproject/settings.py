@@ -29,16 +29,21 @@ SECRET_KEY = 'django-insecure-o0z&k5wt*eis@7)e0g_s)n1f@znu9(zgkayt8p-+0ts9evjw(g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ #True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 
+    "127.0.0.1",
+    "localhost",
+    ]
 
-# For local development
-ALLOWED_HOSTS.append('127.0.0.1')
 
 VERCEL_URL = os.environ.get('VERCEL_URL')
 if VERCEL_URL:
-    hostname = VERCEL_URL.split('://')[-1] 
+    hostname = VERCEL_URL.replace("https://", "").replace("http://", "").strip()
     ALLOWED_HOSTS.append(hostname)# Extract just the hostname
 
+# Allow wildcard for any *.vercel.app domain if you use custom deploy previews
+VERCEL_ALLOWED = os.environ.get("VERCEL_ALLOWED")  # Set in Vercel Dashboard
+if VERCEL_ALLOWED:
+    ALLOWED_HOSTS.append(VERCEL_ALLOWED)
     
 
 
