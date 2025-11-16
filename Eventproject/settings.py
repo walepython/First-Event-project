@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-import pymysql
-pymysql.install_as_MySQLdb()
+# import pymysql
+# pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,16 +32,7 @@ DEBUG = 'RENDER' not in os.environ #True
 ALLOWED_HOSTS = [ "*" ]
 
 
-# VERCEL_URL = os.environ.get('VERCEL_URL')
-# if VERCEL_URL:
-#     hostname = VERCEL_URL.replace("https://", "").replace("http://", "").strip()
-#     ALLOWED_HOSTS.append(hostname)# Extract just the hostname
 
-# # Allow wildcard for any *.vercel.app domain if you use custom deploy previews
-# VERCEL_ALLOWED = os.environ.get("VERCEL_ALLOWED")  # Set in Vercel Dashboard
-# if VERCEL_ALLOWED:
-#     ALLOWED_HOSTS.append(VERCEL_ALLOWED)
-    
 
 
 # Application definition
@@ -94,12 +85,12 @@ WSGI_APPLICATION = 'Eventproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
  
-if 'POSTGRES_URL' in os.environ:
+if 'DATABASE_URL' in os.environ:
     # This block will run ONLY when deployed on Vercel
     # It reads the secret database URL from the environment variables
     DATABASES = {
         'default': dj_database_url.config(
-            default='sqlite:///db.sqlite3',
+            default=os.environ.get('DATABASE_URL'),
             conn_max_age=600 # Optional: keeps connections alive for 10 minutes
         )
     }
