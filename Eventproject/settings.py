@@ -84,12 +84,11 @@ WSGI_APPLICATION = 'Eventproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
  
-if 'DATABASE_URL' in os.environ:
-    # This block will run ONLY when deployed on Vercel
-    # It reads the secret database URL from the environment variables
+if 'DATABASE_URL':
+    
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
+        'default': dj_database_url.parse(
+           'DATABASE_URL',
             conn_max_age=600 # Optional: keeps connections alive for 10 minutes
         )
     }
