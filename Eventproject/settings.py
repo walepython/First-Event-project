@@ -108,7 +108,7 @@ else:
             'USER': 'root',
             'PASSWORD':'waminisce',
             'PORT': '3306',
-            'HOST': '127.0.0.1'
+            # 'HOST': '127.0.0.1'
         }
         
     }
