@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-import Eventproject.mysql_init
+#import Eventproject.mysql_init
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -102,14 +102,18 @@ else:
          # This block will run on your local machine
     # It uses your local MySQL database for development
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'EventRegistration',
-            'USER': 'root',
-            'PASSWORD':'waminisce',
-            'PORT': '3306',
-            'HOST': '127.0.0.1'
+         'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.mysql',
+        #     'NAME': 'EventRegistration',
+        #     'USER': 'root',
+        #     'PASSWORD':'waminisce',
+        #     'PORT': '3306',
+        #     'HOST': '127.0.0.1'
+        # }
         
     }
 
