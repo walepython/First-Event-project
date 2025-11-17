@@ -37,3 +37,11 @@ class Registration(models.Model):
        
        def __str__(self):
         return f'{self.user.username} registered for {self.event.title} ({self.ticket_type})'
+       
+class Contact(models.Model):
+     name = models.CharField(max_length=20,null=True)
+     email = models.EmailField()
+     message = models.TextField(max_length=220,null=True)
+
+     def __str__(self):
+          return self.name

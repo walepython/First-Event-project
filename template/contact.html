@@ -24,7 +24,8 @@
         Got a question? Send me a message and I'll get back to you soon.
       </p>
   
-      <form action="" method="POST" class="space-y-6">
+      <form action="{% url 'contact' %}" method="POST" class="space-y-6">
+        {% csrf_token %}
         <!-- Name -->
         <div>
           <label>Your Name</label>

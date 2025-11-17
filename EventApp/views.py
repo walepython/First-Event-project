@@ -2,7 +2,7 @@ from datetime import date
 from django.http import HttpResponse
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Event,Registration
+from .models import Contact, Event,Registration
 from django.utils import timezone
 from django.contrib import messages
 
@@ -16,6 +16,31 @@ def about(request):
     return render(request, 'about.html')
 
 def contact(request):
+    if request.method == 'POST':
+        # Process form data
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        # Validate required fields
+        if name and email and message:
+            try:
+                # Create and save contact
+                contact = Contact(name=name, email=email, message=message)
+                contact.save()
+                
+                # Optional: Add success message
+                messages.success(request, 'Your message has been sent successfully!')
+                
+                return redirect('success_page')  # Redirect after successful submission
+                
+            except Exception as e:
+                # Handle database errors
+                messages.error(request, 'There was an error sending your message. Please try again.')
+        else:
+            messages.error(request, 'Please fill in all required fields.')
+    
+    # GET request - show empty form
     return render(request, 'contact.html')
 
 def blogs(request):
@@ -27,7 +52,9 @@ def blogs(request):
 def event_list(request):
      
      # Get all events that are in the future
-    events = Event.objects.filter(Date__gte=timezone.now()).order_by('Date')
+    # events = Event.objects.filter(Date__gte=timezone.now()).order_by('Date')
+    events = Event.objects.all()
+    print(f"DEBUG: Events in view: {events.count()}")
     return render(request, 'event_list.html', {'events': events})
 
     # events = Event.objects.all()
