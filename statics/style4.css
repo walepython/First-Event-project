@@ -1384,68 +1384,7 @@ hr{
     font-size: 15px;
   }
 
-  /* Event Cards */
-  #event {
-    flex-direction:column;
-    text-align: center;
-    width: 80%;
-    height: 450px;
-  }
-  .event-date {
-    border-right: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.648);
-    padding-bottom: 30px;
-    left: 30%;
-    position: absolute;
-    top: 69%;
-    
-  }
-  .btn2{
-    position: absolute;
-    top: 5%;
-    left: 8%;
-
-  }
-   
-  .h2{
-    position: absolute;
-    top: 35%;
-    left: 8%;
-  }
-  .h3{
-    position: absolute;
-    top: 47%;
-    left: 8%;
-    font-size: 25px;
-    font-weight: 700;
-    font-style: italic;
-  }
-  .h4{
-    position: absolute;
-    top: 53%;
-    left: 8%;
-    font-size: 25px;
-    font-weight: 700;
-    font-style: italic;
-  }
-  .discript{
-    width: 60vw;
-    padding-left: 50px;
-    position: absolute;
-    top: 63%;
-    left: 8%;
-    
-    
-  }
-  hr{
-    width: 90%;
-  }
-
-  #event img {
-    margin: 0 auto 15px;
-    width: 80vw;
-    max-width: 100%;
-  }
+  
 
   /* About Section */
   .about-div > img {
@@ -1467,5 +1406,163 @@ hr{
   }
   .footer-newsletter > p {
     width: 100%;
+  }
+}
+
+/* ==================== MOBILE FIXES ==================== */
+
+@media (max-width: 768px) {
+  /* Fix event list layout */
+  #sect {
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 10px;
+  }
+  
+  #event {
+      width: 100% !important;
+      height: auto !important;
+      flex-direction: column;
+      padding: 15px;
+      margin: 10px auto;
+      position: relative;
+  }
+  
+  /* Fix all absolute positioning for mobile */
+  .h2 {
+      position: static !important;
+      margin: 15px 0 10px 70px;
+      text-align: center;
+      display: block;
+      width: 60%;
+  }
+  
+  .h3 {
+      position: static !important;
+      margin: 10px 0;
+      text-align: center;
+      font-size: 18px !important;
+  }
+  
+  .h4 {
+      position: static !important;
+      margin: 10px 0;
+      text-align: center;
+      font-size: 16px !important;
+  }
+  
+  .discript {
+      position: static !important;
+      width: 100% !important;
+      margin: 15px 0px;
+      text-align: center;
+      font-size:0.75rem !important;
+      padding: 0 !important;
+  }
+  
+  .btn2 {
+      position: static !important;
+      margin: 15px auto;
+      display: block;
+      width: 80% !important;
+  }
+  
+  /* Fix event date positioning */
+  .event-date {
+      position: static !important;
+      margin: 15px 0;
+      order: 3; /* Move to bottom */
+  }
+  
+  /* Fix images */
+  #event img {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 200px !important;
+      object-fit: cover;
+      margin: 0 auto;
+      display: block;
+  }
+  
+  /* Fix section layout */
+  .section {
+      padding: 40px 15px !important;
+      text-align: center;
+  }
+  
+  .section h1 {
+      font-size: 1.8rem !important;
+  }
+  
+  .section p {
+      font-size: 1rem !important;
+      text-align: center;
+  }
+  
+  /* Fix header for mobile */
+  .site-header {
+      padding: 10px 20px;
+      gap: 20px !important;
+  }
+  
+  /* Fix hero section */
+  .hero-section > .hero2 {
+      font-size: 2rem;
+      text-align: center;
+  }
+  
+  .hero-section > .hero3 {
+      width: 100%;
+      font-size: 1rem;
+      text-align: center;
+      padding: 0 10px;
+  }
+  
+  /* Fix footer for mobile */
+  .footer-container {
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      text-align: center;
+  }
+  
+  .footer-newsletter {
+      width: 100%;
+  }
+  
+  .footer-newsletter > p {
+      width: 100%;
+  }
+  
+  /* Fix contact section */
+  .contact-section {
+      flex-direction: column;
+      padding: 20px;
+  }
+  
+  iframe {
+      width: 100%;
+      min-height: 250px;
+  }
+}
+
+/* Small mobile devices (≤ 480px) */
+@media (max-width: 480px) {
+  #event {
+      padding: 10px;
+      margin: 10px 0;
+  }
+  
+  .hero-section > .hero2 {
+      font-size: 1.5rem;
+  }
+  
+  .section h1 {
+      font-size: 1.5rem !important;
+  }
+  
+  .btn, .btn2 {
+      width: 90% !important;
+      padding: 12px;
   }
 }
